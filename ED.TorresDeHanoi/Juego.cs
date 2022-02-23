@@ -10,6 +10,10 @@ namespace ED.TorresDeHanoi
 
     internal class Juego
     {
+        internal delegate void alMoverDisco(char Origen, char Destino);
+        internal event alMoverDisco DiscoMovido;
+        
+
         private Stack<byte> PosteA;
         private Stack<byte> PosteB;
         private Stack<byte> PosteC;
@@ -73,12 +77,34 @@ namespace ED.TorresDeHanoi
                 }
 
                 posteDestino.Push(posteOrigen.Pop());
+                DiscoMovido?.Invoke(Origen, Destino);
             }
             else
             {
                 posteDestino.Push(posteOrigen.Pop());
+                DiscoMovido?.Invoke(Origen, Destino);
             }
             
+        }
+
+        internal void VerPostes()
+        {
+            Console.WriteLine("Poste A");
+            MostrarDatos(PosteA);
+            Console.WriteLine("Poste B");
+            MostrarDatos(PosteB);
+            Console.WriteLine("Poste C");
+            MostrarDatos(PosteC);
+        }
+
+        private void MostrarDatos(Stack<byte> poste)
+        {
+            
+            foreach (var valor in poste)
+            {
+                Console.WriteLine($"{valor} ");
+            }
+            Console.WriteLine();
         }
     }
 }
