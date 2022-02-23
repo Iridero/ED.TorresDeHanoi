@@ -12,7 +12,7 @@ namespace ED.TorresDeHanoi
     {
         internal delegate void alMoverDisco(char Origen, char Destino);
         internal event alMoverDisco DiscoMovido;
-        
+        internal Stack<string> historial;
 
         private Stack<byte> PosteA;
         private Stack<byte> PosteB;
@@ -78,11 +78,21 @@ namespace ED.TorresDeHanoi
 
                 posteDestino.Push(posteOrigen.Pop());
                 DiscoMovido?.Invoke(Origen, Destino);
+                if (historial==null)
+                {
+                    historial = new Stack<string>();
+                }
+                historial.Push(Origen.ToString() + Destino);
             }
             else
             {
                 posteDestino.Push(posteOrigen.Pop());
                 DiscoMovido?.Invoke(Origen, Destino);
+                if (historial == null)
+                {
+                    historial = new Stack<string>();
+                }
+                historial.Push(Origen.ToString() + Destino);
             }
             
         }
@@ -105,6 +115,17 @@ namespace ED.TorresDeHanoi
                 Console.WriteLine($"{valor} ");
             }
             Console.WriteLine();
+        }
+
+        internal void Deshacer()
+        {
+            // Ver si hay algo en el historial
+            // Sacar la primer cadena
+            // Separar la cadena en caracteres (2 origen y destino)
+            // identificar PosteOrigen y Poste Destino
+            // Sacar de PosteOrigen y poner en destino
+            // lanzar evento DiscoMovido
+
         }
     }
 }

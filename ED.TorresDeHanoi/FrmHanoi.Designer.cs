@@ -33,6 +33,7 @@
             this.areaPosteC = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblMensaje = new System.Windows.Forms.Label();
+            this.btnDeshacer = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // areaPosteA
@@ -84,11 +85,22 @@
             this.lblMensaje.Size = new System.Drawing.Size(664, 25);
             this.lblMensaje.TabIndex = 2;
             // 
+            // btnDeshacer
+            // 
+            this.btnDeshacer.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnDeshacer.Location = new System.Drawing.Point(549, 12);
+            this.btnDeshacer.Name = "btnDeshacer";
+            this.btnDeshacer.Size = new System.Drawing.Size(59, 53);
+            this.btnDeshacer.TabIndex = 3;
+            this.btnDeshacer.Text = "↶";
+            this.btnDeshacer.UseVisualStyleBackColor = true;
+            // 
             // FrmHanoi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(960, 450);
+            this.Controls.Add(this.btnDeshacer);
             this.Controls.Add(this.lblMensaje);
             this.Controls.Add(this.areaPosteC);
             this.Controls.Add(this.areaPosteB);
@@ -108,5 +120,6 @@
         private FlowLayoutPanel areaPosteC;
         private Panel panel1;
         private Label lblMensaje;
+        private Button btnDeshacer;
     }
 }
