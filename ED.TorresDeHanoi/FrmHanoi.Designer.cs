@@ -34,6 +34,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblMensaje = new System.Windows.Forms.Label();
             this.btnDeshacer = new System.Windows.Forms.Button();
+            this.lstHistorial = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // areaPosteA
@@ -94,12 +95,23 @@
             this.btnDeshacer.TabIndex = 3;
             this.btnDeshacer.Text = "↶";
             this.btnDeshacer.UseVisualStyleBackColor = true;
+            this.btnDeshacer.Click += new System.EventHandler(this.btnDeshacer_Click);
+            // 
+            // lstHistorial
+            // 
+            this.lstHistorial.FormattingEnabled = true;
+            this.lstHistorial.ItemHeight = 20;
+            this.lstHistorial.Location = new System.Drawing.Point(755, 34);
+            this.lstHistorial.Name = "lstHistorial";
+            this.lstHistorial.Size = new System.Drawing.Size(150, 364);
+            this.lstHistorial.TabIndex = 4;
             // 
             // FrmHanoi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(960, 450);
+            this.Controls.Add(this.lstHistorial);
             this.Controls.Add(this.btnDeshacer);
             this.Controls.Add(this.lblMensaje);
             this.Controls.Add(this.areaPosteC);
@@ -121,5 +133,6 @@
         private Panel panel1;
         private Label lblMensaje;
         private Button btnDeshacer;
+        private ListBox lstHistorial;
     }
 }

@@ -75,24 +75,27 @@ namespace ED.TorresDeHanoi
                 {
                     throw new ArgumentException("El disco origen es mayor que el destino");
                 }
-
-                posteDestino.Push(posteOrigen.Pop());
-                DiscoMovido?.Invoke(Origen, Destino);
-                if (historial==null)
-                {
-                    historial = new Stack<string>();
-                }
-                historial.Push(Origen.ToString() + Destino);
-            }
-            else
-            {
-                posteDestino.Push(posteOrigen.Pop());
-                DiscoMovido?.Invoke(Origen, Destino);
                 if (historial == null)
                 {
                     historial = new Stack<string>();
                 }
                 historial.Push(Origen.ToString() + Destino);
+                posteDestino.Push(posteOrigen.Pop());
+                DiscoMovido?.Invoke(Origen, Destino);
+               
+                
+            }
+            else
+            {
+                if (historial == null)
+                {
+                    historial = new Stack<string>();
+                }
+                historial.Push(Origen.ToString() + Destino);
+                posteDestino.Push(posteOrigen.Pop());
+                DiscoMovido?.Invoke(Origen, Destino);
+                
+                
             }
             
         }
@@ -120,12 +123,27 @@ namespace ED.TorresDeHanoi
         internal void Deshacer()
         {
             // Ver si hay algo en el historial
+            if (historial.Count==0)
+            {
+                return;
+            }
             // Sacar la primer cadena
+            string paso=historial.Pop();
             // Separar la cadena en caracteres (2 origen y destino)
-            // identificar PosteOrigen y Poste Destino
-            // Sacar de PosteOrigen y poner en destino
-            // lanzar evento DiscoMovido
+            char origen=paso[0];
+            char destino=paso[1];
+            // identificar PosteOrigen y PosteDestino
+            Stack<byte> PosteOrigen =
+                (origen == 'A') ? PosteA :
+                    (origen == 'B') ? PosteB : PosteC;
 
+            Stack<byte> PosteDestino =
+                (destino == 'A') ? PosteA :
+                    (destino == 'B') ? PosteB : PosteC;
+            // Sacar de PosteOrigen y poner en destino (era al revés)
+            PosteOrigen.Push(PosteDestino.Pop());
+            // lanzar evento DiscoMovido
+            DiscoMovido?.Invoke(destino, origen);
         }
     }
 }

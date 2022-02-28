@@ -14,14 +14,32 @@ namespace ED.TorresDeHanoi
         private void FrmHanoi_Load(object sender, EventArgs e)
         {
             CrearDiscos(5);
+            PonerPanelFantasma(areaPosteA);
+            PonerPanelFantasma(areaPosteB);
+            PonerPanelFantasma(areaPosteC);
+
             while (discos.Count > 0)
             {
                 Panel disco = discos.Pop();
                 areaPosteA.Controls.Add(disco);
             }
 
+
             juego.Iniciar(5);
             juego.DiscoMovido += Juego_DiscoMovido;
+        }
+
+        private void PonerPanelFantasma(FlowLayoutPanel panel)
+        {
+            Panel fantasma = new Panel()
+            {
+                Anchor = AnchorStyles.None,
+                Height = 1,
+                BackColor = Color.Transparent,
+                Left = 0,
+                Width = areaPosteA.Width
+            };
+            panel.Controls.Add(fantasma);
         }
 
         private void Juego_DiscoMovido(char Origen, char Destino)
@@ -58,6 +76,9 @@ namespace ED.TorresDeHanoi
             origen.Controls.Remove(disco);
             origen.BorderStyle = BorderStyle.None;
             destino.Controls.Add(disco);
+
+            lstHistorial.DataSource = null;
+            lstHistorial.DataSource = juego.historial.ToArray();
         }
 
         private void CrearDiscos(int numDiscos)
@@ -124,6 +145,11 @@ namespace ED.TorresDeHanoi
         {
             lblMensaje.Text = "";
             mensaje_Timer.Stop();
+        }
+
+        private void btnDeshacer_Click(object sender, EventArgs e)
+        {
+            juego.Deshacer();
         }
     }
 }
